@@ -18,15 +18,12 @@
 
 #include <cstdio>
 #include <fstream>
-#include <string>
 #include <stddef.h>
 #include <stdlib.h>
-#include <string.h>
 #include <stumpless.h>
 #include <gtest/gtest.h>
 #include "test/helper/assert.hpp"
 #include "test/helper/rfc5424.hpp"
-// #include "private/target/stream.h"
 
 namespace {
   int
@@ -291,7 +288,7 @@ namespace {
     remove( filename );
   }
 
-  TEST( SetSeverityColor, CorrectEscapeCodeOut ){
+  TEST( SetSeverityColor, Generic ){
     
     std::FILE* ofs = tmpfile();
     struct stumpless_target *target;
@@ -319,8 +316,8 @@ namespace {
     
     fseek(ofs, 0, SEEK_SET);
     
-    getline( &written_msg, &line1, ofs);    
-    getline( &reset_code, &line2, ofs);
+    std::getline( &written_msg, ofs);    
+    std::getline( &reset_code, ofs);
     
     written_msg[5] = '\0';
 
